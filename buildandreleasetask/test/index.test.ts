@@ -1,3 +1,1 @@
-describe('Jira Commenter', () => {
-
-})
+describe("Jira Commenter", () => {});
