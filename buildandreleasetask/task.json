@@ -1,0 +1,21 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "eff581e6-154d-43ff-9c19-ee79ec67e176",
+    "name": "JiraCommenterExtension",
+    "friendlyName": "JIRA Commenter Extension",
+    "description": "This extension allows you to create comments on your JIRA tickets. Useful mainly for issue tracking and linking CI resources to your tickets.",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Adrian Soomro",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 0
+    },
+    "instanceNameFormat": "Jira Commenter",
+    "execution": {
+        "Node10": {
+            "target": "index.js"
+        }
+    }
+}
