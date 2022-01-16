@@ -8,7 +8,7 @@
     "dist/*"
   ],
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "lint": "eslint --ext .ts,.json ."
   },
   "keywords": [],
@@ -23,17 +23,19 @@
     }
   },
   "dependencies": {
-    "azure-pipelines-task-lib": "^3.1.10"
+    "azure-pipelines-task-lib": "^3.1.10",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
     "@types/node": "^17.0.8",
+    "@types/node-fetch": "^2.5.10",
     "@types/q": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "del": "^6.0.0",
     "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.2.0",
