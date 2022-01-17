@@ -1,8 +1,11 @@
 {
+  "compileOnSave": true,
   "compilerOptions": {
     "module": "commonjs",
     "target": "es6",
     "declaration": true,
+    "outDir": "dist",
+    "rootDir": "./",
     "sourceMap": true,
     "strict": true,
     "noImplicitAny": true,
@@ -10,7 +13,7 @@
     "esModuleInterop": true,
     "lib": ["es2019"]
   },
-  "exclude": ["node_modules", "**/*.test.ts"],
+  "exclude": ["node_modules", "dist"],
   "skipLibCheck": true,
   "forceConsistentCasingInFileNames": true
 }
