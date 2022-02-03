@@ -35,9 +35,15 @@ export const validateProject = async (project: string) => {
   )
 }
 
-// export const validateTicketNumber = (ticketNumber: TicketNumber) => {
-//   // must be convertible to a number
-// }
+export const validateTicketNumber = async (ticketNumber: TicketNumber) => {
+  const schema = joi.number().max(1_000_000)
+
+  await validateData(
+    ticketNumber,
+    schema,
+    `'${ticketNumber}' is not a valid ticket number, the ticket number must be a number less than 1 million, please try again with such number.`
+  )
+}
 
 // export const validatePRLink = (prLink: string) => {
 //   // make sure this is a valid URI

@@ -1,7 +1,8 @@
 import {
   validateEmail,
   validateOrganisation,
-  validateProject
+  validateProject,
+  validateTicketNumber
 } from '../validator'
 
 describe('The validator', () => {
@@ -30,6 +31,7 @@ describe('The validator', () => {
       ${'foo@bar..com'}
       ${'foo.bar@com'}
       ${'foo\\@bar.com'}
+      ${' '}
     `(
       'Should throw an error if email address is $invalidEmailAddress',
       async ({ invalidEmailAddress }) => {
@@ -65,6 +67,7 @@ describe('The validator', () => {
       ${'!foo'}
       ${'%bar'}
       ${'£baz'}
+      ${' '}
     `(
       'Should throw an error when the organisation name is $invalidOrganisation',
       async ({ invalidOrganisation }) => {
@@ -77,6 +80,9 @@ describe('The validator', () => {
         )
       }
     )
+  })
+
+  describe('Should validate project key', () => {
     it.each`
       validProjectKey
       ${'AP'}
@@ -98,12 +104,50 @@ describe('The validator', () => {
       ${'$C'}
       ${'^D'}
       ${'*E'}
+      ${' '}
     `(
       'Should throw an error when the project key is $invalidProjectKey',
       async ({ invalidProjecKey }) => {
         await expect(() => validateProject(invalidProjecKey)).rejects.toThrow(
           new TypeError(
             `'${invalidProjecKey}' is not a valid project key, please refer to the documentation to obtain the project key`
+          )
+        )
+      }
+    )
+  })
+
+  describe('Should validate ticket number', () => {
+    it.each`
+      validTicketNumber
+      ${'1234'}
+      ${1234}
+      ${'123456'}
+      ${123456}
+      ${'999999'}
+      ${999999}
+    `(
+      'Should not throw an error when the ticket number is $validTicketNumber',
+      async ({ validTicketNumber }) => {
+        await validateTicketNumber(validTicketNumber)
+      }
+    )
+
+    it.each`
+      invalidTicketNumber
+      ${1234567}
+      ${'1234567'}
+      ${'!1234567890123'}
+      ${'A1234567890123'}
+      ${' '}
+    `(
+      'Should throw an error when the ticket number is $invalidTicketNumber',
+      async ({ invalidTicketNumber }) => {
+        await expect(() =>
+          validateTicketNumber(invalidTicketNumber)
+        ).rejects.toThrow(
+          new TypeError(
+            `'${invalidTicketNumber}' is not a valid ticket number, the ticket number must be a number less than 1 million, please try again with such number.`
           )
         )
       }
