@@ -1,4 +1,8 @@
-import { validateEmail, validateOrganisation } from '../validator'
+import {
+  validateEmail,
+  validateOrganisation,
+  validateProject
+} from '../validator'
 
 describe('The validator', () => {
   describe('Should validate the email address', () => {
@@ -69,6 +73,37 @@ describe('The validator', () => {
         ).rejects.toThrow(
           new TypeError(
             `'${invalidOrganisation}' is not a valid organisation name, please refer to the documentation to obtain the organisation name`
+          )
+        )
+      }
+    )
+    it.each`
+      validProjectKey
+      ${'AP'}
+      ${'A1'}
+      ${'CAP456789'}
+    `(
+      'Should not throw an error when the project key is $validProjectKey',
+      async ({ validProjectKey }) => {
+        await validateProject(validProjectKey)
+      }
+    )
+
+    it.each`
+      invalidProjectKey
+      ${'A234567890'}
+      ${'1AP'}
+      ${'!A'}
+      ${'%B'}
+      ${'$C'}
+      ${'^D'}
+      ${'*E'}
+    `(
+      'Should throw an error when the project key is $invalidProjectKey',
+      async ({ invalidProjecKey }) => {
+        await expect(() => validateProject(invalidProjecKey)).rejects.toThrow(
+          new TypeError(
+            `'${invalidProjecKey}' is not a valid project key, please refer to the documentation to obtain the project key`
           )
         )
       }

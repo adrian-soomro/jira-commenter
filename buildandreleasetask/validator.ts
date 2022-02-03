@@ -21,10 +21,19 @@ export const validateOrganisation = async (organisation: string) => {
   )
 }
 
-// export const validateProject = (project: string) => {
-// max 10 chars
-//   // check jira format, most likely string
-// }
+export const validateProject = async (project: string) => {
+  const schema = joi
+    .string()
+    .max(10)
+    .regex(/^[A-Z][A-Z0-9]+$/)
+    .required()
+
+  await validateData(
+    project,
+    schema,
+    `'${project}' is not a valid project key, please refer to the documentation to obtain the project key`
+  )
+}
 
 // export const validateTicketNumber = (ticketNumber: TicketNumber) => {
 //   // must be convertible to a number
