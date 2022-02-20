@@ -11,10 +11,29 @@ const getRequiredInputs = (): Parameter[] =>
     return { key: param.key, value: input }
   })
 
+const mapInputsIntoVariables = () => {
+  const parameterVariableNames = [...params.map(param => param.key)] as const
+  type ParameterVariableName = typeof parameterVariableNames[number]
+
+  const variables: Record<ParameterVariableName, string | number> = {}
+  const allParams = getRequiredInputs()
+  allParams.forEach(param => {
+    variables[param.key] = param.value
+  })
+  return variables
+}
+
+export const validateInputs = () => {
+  mapInputsIntoVariables()
+  // have individual validation functions that setStatus to failed on error
+  // const { username, accessToken, organisation, project, ticketNumber, prLink } =
+  //   allVariables
+}
+
 // eslint-disable-next-line require-await
 async function run() {
   try {
-    getRequiredInputs()
+    validateInputs()
   } catch (err: any) {
     setResult(TaskResult.Failed, err.message)
   }
