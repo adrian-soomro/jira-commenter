@@ -1,6 +1,7 @@
 import {
   validateEmail,
   validateOrganisation,
+  validatePRLink,
   validateProject,
   validateTicketNumber
 } from '../validator'
@@ -75,7 +76,7 @@ describe('The validator', () => {
           validateOrganisation(invalidOrganisation)
         ).rejects.toThrow(
           new TypeError(
-            `'${invalidOrganisation}' is not a valid organisation name, please refer to the documentation to obtain the organisation name`
+            `'${invalidOrganisation}' is not a valid organisation name, please refer to the documentation to obtain the organisation name.`
           )
         )
       }
@@ -89,7 +90,7 @@ describe('The validator', () => {
       ${'A1'}
       ${'CAP456789'}
     `(
-      'Should not throw an error when the project key is $validProjectKey',
+      'Should not throw an error when the project key is $validProjectKey.',
       async ({ validProjectKey }) => {
         await validateProject(validProjectKey)
       }
@@ -110,7 +111,7 @@ describe('The validator', () => {
       async ({ invalidProjecKey }) => {
         await expect(() => validateProject(invalidProjecKey)).rejects.toThrow(
           new TypeError(
-            `'${invalidProjecKey}' is not a valid project key, please refer to the documentation to obtain the project key`
+            `'${invalidProjecKey}' is not a valid project key, please refer to the documentation to obtain the project key.`
           )
         )
       }
@@ -148,6 +149,38 @@ describe('The validator', () => {
         ).rejects.toThrow(
           new TypeError(
             `'${invalidTicketNumber}' is not a valid ticket number, the ticket number must be a number less than 1 million, please try again with such number.`
+          )
+        )
+      }
+    )
+  })
+
+  describe('Should validate PR link', () => {
+    it.each`
+      validPRLink
+      ${'https://github.com/username/repo/pull/1'}
+      ${'https://www.google.com'}
+      ${'https://google.com'}
+      ${'https://foo.bar.com'}
+    `(
+      'Should not throw an error when the PR link is $validTicketNumber',
+      async ({ validPRLink }) => {
+        await validatePRLink(validPRLink)
+      }
+    )
+
+    it.each`
+      invalidPRLink
+      ${'http://github.com/username/repo/pull/1'}
+      ${'http://www.google.com'}
+      ${'git@github.com:username/repo.git'}
+      ${'foo.bar.com'}
+    `(
+      'Should throw an error when the PR link is $invalidPRLink',
+      async ({ invalidPRLink }) => {
+        await expect(() => validatePRLink(invalidPRLink)).rejects.toThrow(
+          new TypeError(
+            `'${invalidPRLink}' is not a valid URI, it needs to conform to RFC-3986 https://datatracker.ietf.org/doc/html/rfc3986. Please try again with a valid URI.`
           )
         )
       }

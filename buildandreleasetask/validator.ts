@@ -17,7 +17,7 @@ export const validateOrganisation = async (organisation: string) => {
   await validateData(
     organisation,
     schema,
-    `'${organisation}' is not a valid organisation name, please refer to the documentation to obtain the organisation name`
+    `'${organisation}' is not a valid organisation name, please refer to the documentation to obtain the organisation name.`
   )
 }
 
@@ -31,7 +31,7 @@ export const validateProject = async (project: string) => {
   await validateData(
     project,
     schema,
-    `'${project}' is not a valid project key, please refer to the documentation to obtain the project key`
+    `'${project}' is not a valid project key, please refer to the documentation to obtain the project key.`
   )
 }
 
@@ -45,9 +45,18 @@ export const validateTicketNumber = async (ticketNumber: TicketNumber) => {
   )
 }
 
-// export const validatePRLink = (prLink: string) => {
-//   // make sure this is a valid URI
-// }
+export const validatePRLink = async (prLink: string) => {
+  const schema = joi.string().uri({
+    scheme: ['https'],
+    allowQuerySquareBrackets: true
+  })
+
+  await validateData(
+    prLink,
+    schema,
+    `'${prLink}' is not a valid URI, it needs to conform to RFC-3986 https://datatracker.ietf.org/doc/html/rfc3986. Please try again with a valid URI.`
+  )
+}
 
 const validateData = async (
   data: string | TicketNumber,
