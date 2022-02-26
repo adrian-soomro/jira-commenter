@@ -14,7 +14,7 @@ describe('The validator', () => {
       ${'f.oo@bar.com'}
       ${'foo+tag@bar.com'}
     `(
-      'Should not throw an error if email address is $validEmailAddress',
+      `Should not throw an error if email address is '$validEmailAddress'`,
       async ({ validEmailAddress }) => {
         await validateEmail(validEmailAddress)
       }
@@ -34,7 +34,7 @@ describe('The validator', () => {
       ${'foo\\@bar.com'}
       ${' '}
     `(
-      'Should throw an error if email address is $invalidEmailAddress',
+      `Should throw an error if email address is '$invalidEmailAddress'`,
       async ({ invalidEmailAddress }) => {
         await expect(() => validateEmail(invalidEmailAddress)).rejects.toThrow(
           new TypeError(
@@ -52,7 +52,7 @@ describe('The validator', () => {
       ${'amazons3'}
       ${'microsoft'}
     `(
-      'Should not throw an error when the organisation name is $validOrganisation',
+      `Should not throw an error when the organisation name is '$validOrganisation'`,
       async ({ validOrganisation }) => {
         await validateOrganisation(validOrganisation)
       }
@@ -70,7 +70,7 @@ describe('The validator', () => {
       ${'£baz'}
       ${' '}
     `(
-      'Should throw an error when the organisation name is $invalidOrganisation',
+      `Should throw an error when the organisation name is '$invalidOrganisation'`,
       async ({ invalidOrganisation }) => {
         await expect(() =>
           validateOrganisation(invalidOrganisation)
@@ -90,7 +90,7 @@ describe('The validator', () => {
       ${'A1'}
       ${'CAP456789'}
     `(
-      'Should not throw an error when the project key is $validProjectKey.',
+      `Should not throw an error when the project key is '$validProjectKey'`,
       async ({ validProjectKey }) => {
         await validateProject(validProjectKey)
       }
@@ -107,7 +107,7 @@ describe('The validator', () => {
       ${'*E'}
       ${' '}
     `(
-      'Should throw an error when the project key is $invalidProjectKey',
+      `Should throw an error when the project key is '$invalidProjectKey'`,
       async ({ invalidProjecKey }) => {
         await expect(() => validateProject(invalidProjecKey)).rejects.toThrow(
           new TypeError(
@@ -128,7 +128,7 @@ describe('The validator', () => {
       ${'999999'}
       ${999999}
     `(
-      'Should not throw an error when the ticket number is $validTicketNumber',
+      `Should not throw an error when the ticket number is '$validTicketNumber'`,
       async ({ validTicketNumber }) => {
         await validateTicketNumber(validTicketNumber)
       }
@@ -142,7 +142,7 @@ describe('The validator', () => {
       ${'A1234567890123'}
       ${' '}
     `(
-      'Should throw an error when the ticket number is $invalidTicketNumber',
+      `Should throw an error when the ticket number is '$invalidTicketNumber'`,
       async ({ invalidTicketNumber }) => {
         await expect(() =>
           validateTicketNumber(invalidTicketNumber)
@@ -163,7 +163,7 @@ describe('The validator', () => {
       ${'https://google.com'}
       ${'https://foo.bar.com'}
     `(
-      'Should not throw an error when the PR link is $validTicketNumber',
+      `Should not throw an error when the PR link is '$validTicketNumber'`,
       async ({ validPRLink }) => {
         await validatePRLink(validPRLink)
       }
@@ -176,7 +176,7 @@ describe('The validator', () => {
       ${'git@github.com:username/repo.git'}
       ${'foo.bar.com'}
     `(
-      'Should throw an error when the PR link is $invalidPRLink',
+      `Should throw an error when the PR link is '$invalidPRLink'`,
       async ({ invalidPRLink }) => {
         await expect(() => validatePRLink(invalidPRLink)).rejects.toThrow(
           new TypeError(
