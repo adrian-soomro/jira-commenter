@@ -21,11 +21,11 @@ export const params: Parameter[] = [
     value: 'ACM'
   },
   {
-    key: 'ticket_number',
+    key: 'ticketNumber',
     value: '1234'
   },
   {
-    key: 'pr_link',
+    key: 'prLink',
     value: 'https://pr.link.com'
   }
 ]

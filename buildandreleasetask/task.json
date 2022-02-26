@@ -47,7 +47,7 @@
       "helpMarkDown": "Name of your project, found by accessing your JIRA board. E.g. https://{{ORGANISATION}}.atlassian.net/jira/software/c/projects/{{PROJECT}}/boards/x'."
     },
     {
-      "name": "ticket_number",
+      "name": "ticketNumber",
       "type": "int",
       "label": "Ticket Number",
       "defaultValue": "",
@@ -55,7 +55,7 @@
       "helpMarkDown": "Number of the ticket/issue you want the commenter to comment on."
     },
     {
-      "name": "pr_link",
+      "name": "prLink",
       "type": "string",
       "label": "Link to a PR",
       "defaultValue": "",
