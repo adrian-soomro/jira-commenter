@@ -163,7 +163,7 @@ describe('The validator', () => {
       ${'https://google.com'}
       ${'https://foo.bar.com'}
     `(
-      `Should not throw an error when the PR link is '$validTicketNumber'`,
+      `Should not throw an error when the PR link is '$validPRLink'`,
       async ({ validPRLink }) => {
         await validatePRLink(validPRLink)
       }
