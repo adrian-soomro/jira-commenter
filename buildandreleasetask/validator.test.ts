@@ -4,7 +4,7 @@ import {
   validatePRLink,
   validateProject,
   validateTicketNumber
-} from '../validator'
+} from './validator'
 
 describe('The validator', () => {
   describe('Should validate the email address', () => {
