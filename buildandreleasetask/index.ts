@@ -1,18 +1,19 @@
 import { getInput, setResult, TaskResult } from 'azure-pipelines-task-lib/task'
-import { params, Parameter } from './config'
+import { Parameter, getParameterKeys } from './config'
+
 const getRequiredInputs = (): Parameter[] =>
-  params.map(param => {
-    const input = getInput(param.key, true)
+  getParameterKeys().map(parameterKey => {
+    const input = getInput(parameterKey, true)
     if (!input) {
       throw new Error(
-        `Invalid input! Parameter ${param.key} is missing, please provide it.`
+        `Invalid input! Parameter ${parameterKey} is missing, please provide it.`
       )
     }
-    return { key: param.key, value: input }
+    return { key: parameterKey, value: input }
   })
 
 const mapInputsIntoVariables = () => {
-  const parameterVariableNames = [...params.map(param => param.key)] as const
+  const parameterVariableNames = [...getParameterKeys()] as const
   type ParameterVariableName = typeof parameterVariableNames[number]
 
   const variables: Record<ParameterVariableName, string | number> = {}
