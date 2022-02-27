@@ -1,7 +1,7 @@
 import { getInput } from 'azure-pipelines-task-lib/task'
 import { getParameterKeys } from './config'
 import { getExampleValueForParameterKey } from './testUtils'
-import { getRequiredInputs, validateInputs } from './index'
+import { getRequiredInputs, validateInputs } from './inputParser'
 
 jest.mock('azure-pipelines-task-lib/task')
 const mockedTaskLibrary = getInput as unknown as jest.Mock
