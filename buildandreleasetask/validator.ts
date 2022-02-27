@@ -1,4 +1,4 @@
-import * as joi from 'joi'
+import joi from 'joi'
 import { TicketNumber } from './types'
 
 export const validateEmail = async (email: string) => {
@@ -8,6 +8,16 @@ export const validateEmail = async (email: string) => {
     email,
     schema,
     `'${email}' is not a valid email address, please provide a valid email address and try again.`
+  )
+}
+
+export const validateToken = async (token: string) => {
+  const schema = joi.string().alphanum()
+
+  await validateData(
+    token,
+    schema,
+    `'${token}' is not a valid api token, please refer to the documentation to obtain the api token.`
   )
 }
 

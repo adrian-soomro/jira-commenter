@@ -3,7 +3,8 @@ import {
   validateOrganisation,
   validatePRLink,
   validateProject,
-  validateTicketNumber
+  validateTicketNumber,
+  validateToken
 } from './validator'
 
 describe('The validator', () => {
@@ -39,6 +40,38 @@ describe('The validator', () => {
         await expect(() => validateEmail(invalidEmailAddress)).rejects.toThrow(
           new TypeError(
             `'${invalidEmailAddress}' is not a valid email address, please provide a valid email address and try again.`
+          )
+        )
+      }
+    )
+  })
+
+  describe('Should validate the api token', () => {
+    it.each`
+      validToken
+      ${'ajsl1jl2k35Kkwjef'}
+      ${'121231231231'}
+      ${'foobar'}
+    `(
+      `Should not throw an error if token is '$validToken'`,
+      async ({ validToken }) => {
+        await validateToken(validToken)
+      }
+    )
+
+    it.each`
+      invalidToken
+      ${'foo@'}
+      ${' '}
+      ${'!'}
+      ${'$'}
+      ${'`'}
+    `(
+      `Should throw an error if token is '$invalidToken'`,
+      async ({ invalidToken }) => {
+        await expect(() => validateToken(invalidToken)).rejects.toThrow(
+          new TypeError(
+            `'${invalidToken}' is not a valid api token, please refer to the documentation to obtain the api token.`
           )
         )
       }
