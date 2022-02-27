@@ -31,6 +31,4 @@ describe('The index', () => {
       )
     })
   })
-
-  describe.skip('Should validate the inputs', () => {})
 })
