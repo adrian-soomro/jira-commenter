@@ -6,3 +6,12 @@ export interface CommenterCredentials {
   organisation: string
   project: string
 }
+
+export type InputParameters = {
+  emailAddress: string
+  accessToken: string
+  organisation: string
+  project: string
+  ticketNumber: TicketNumber
+  prLink: string
+}

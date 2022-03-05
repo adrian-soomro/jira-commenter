@@ -1,47 +1,21 @@
 import { getInput } from 'azure-pipelines-task-lib/task'
-import { Parameter, getParameterKeys } from './config'
-import {
-  validateEmail,
-  validateOrganisation,
-  validatePRLink,
-  validateProject,
-  validateTicketNumber,
-  validateToken
-} from './validator'
+import { InputParameters } from './types'
 
-export const getRequiredInputs = (): Parameter[] =>
-  getParameterKeys().map(parameterKey => {
-    const input = getInput(parameterKey, true)
-    if (!input) {
-      throw new Error(
-        `Invalid input! Parameter ${parameterKey} is missing, please provide it.`
-      )
-    }
-    return { key: parameterKey, value: input }
-  })
-
-const mapInputsIntoVariables = () => {
-  const parameterVariableNames = [...getParameterKeys()] as const
-  type ParameterVariableName = typeof parameterVariableNames[number]
-
-  const variables: Record<ParameterVariableName, string | number> = {}
-  const allParams = getRequiredInputs()
-  allParams.forEach(param => {
-    variables[param.key] = param.value
-  })
-  return variables
+const getInputValueByName = (variableName: string) => {
+  const input = getInput(variableName)
+  if (!input) {
+    throw new Error(
+      `Invalid input! Parameter ${variableName} is missing, please provide it.`
+    )
+  }
+  return input
 }
 
-export const validateInputs = async () => {
-  const { email, token, organisation, project, ticketNumber, prLink } =
-    mapInputsIntoVariables()
-
-  await Promise.all([
-    validateEmail(email as string),
-    validateToken(token as string),
-    validateOrganisation(organisation as string),
-    validateProject(project as string),
-    validateTicketNumber(ticketNumber),
-    validatePRLink(prLink as string)
-  ])
-}
+export const getRequiredInputs = (): InputParameters => ({
+  emailAddress: getInputValueByName('email'),
+  accessToken: getInputValueByName('token'),
+  organisation: getInputValueByName('organisation'),
+  project: getInputValueByName('project'),
+  ticketNumber: getInputValueByName('ticketNumber'),
+  prLink: getInputValueByName('prLink')
+})

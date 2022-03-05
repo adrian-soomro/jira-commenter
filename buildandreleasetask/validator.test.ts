@@ -1,10 +1,12 @@
+import { InputParameters } from './types'
 import {
   validateEmail,
   validateOrganisation,
   validatePRLink,
   validateProject,
   validateTicketNumber,
-  validateToken
+  validateToken,
+  validateInputs
 } from './validator'
 
 describe('The validator', () => {
@@ -218,5 +220,35 @@ describe('The validator', () => {
         )
       }
     )
+  })
+
+  describe('Should validate the inputs', () => {
+    it('Should not throw if all inputs are valid', async () => {
+      const validInputs: InputParameters = {
+        emailAddress: 'foo@bar.com',
+        accessToken: '4lph4num3r1c5tr1ng',
+        organisation: 'Acme',
+        project: 'ACM',
+        ticketNumber: 1,
+        prLink: 'https://github.com/acme/1'
+      }
+      await validateInputs(validInputs)
+    })
+
+    it('Should throw if some inputs are invalid', async () => {
+      const invalidInputs: InputParameters = {
+        emailAddress: 'foo',
+        accessToken: '4lph4num3r1c5tr1ng',
+        organisation: 'Acme',
+        project: 'ACM',
+        ticketNumber: 1,
+        prLink: 'https://github.com/acme/1'
+      }
+      await expect(() => validateInputs(invalidInputs)).rejects.toThrow(
+        new TypeError(
+          `'${invalidInputs.emailAddress}' is not a valid email address, please provide a valid email address and try again.`
+        )
+      )
+    })
   })
 })
