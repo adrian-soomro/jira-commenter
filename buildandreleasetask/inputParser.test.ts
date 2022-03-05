@@ -1,6 +1,6 @@
 import { getInput } from 'azure-pipelines-task-lib/task'
-import { getParameterKeys } from './config'
-import { validateInputs } from './index'
+import { getParameterKeys } from './testUtils'
+import { getRequiredInputs } from './inputParser'
 
 jest.mock('azure-pipelines-task-lib/task')
 const mockedTaskLibrary = getInput as unknown as jest.Mock
@@ -11,7 +11,7 @@ describe('The index', () => {
       getParameterKeys().forEach(_parameterKey => {
         mockedTaskLibrary.mockImplementationOnce(() => 'foo')
       })
-      validateInputs()
+      expect(() => getRequiredInputs()).not.toThrowError()
     })
 
     it('Should throw if a parameter is missing', () => {
@@ -24,7 +24,7 @@ describe('The index', () => {
         mockedTaskLibrary.mockImplementationOnce(() => 'foo')
       })
 
-      expect(() => validateInputs()).toThrowError(
+      expect(() => getRequiredInputs()).toThrowError(
         new Error(
           `Invalid input! Parameter ${parameterKeyToSkip} is missing, please provide it.`
         )

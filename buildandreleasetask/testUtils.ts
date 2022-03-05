@@ -27,3 +27,12 @@ const getExampleParameters = () => [
 
 export const getExampleValueForParameterKey = (parameterKey: string) =>
   getExampleParameters().find(param => param.key === parameterKey)?.value
+
+export const getParameterKeys = () => [
+  'email',
+  'token',
+  'organisation',
+  'project',
+  'ticketNumber',
+  'prLink'
+]

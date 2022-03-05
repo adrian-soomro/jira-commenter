@@ -1,5 +1,5 @@
-import * as joi from 'joi'
-import { TicketNumber } from './types'
+import joi from 'joi'
+import { InputParameters, TicketNumber } from './types'
 
 export const validateEmail = async (email: string) => {
   const schema = joi.string().email()
@@ -8,6 +8,16 @@ export const validateEmail = async (email: string) => {
     email,
     schema,
     `'${email}' is not a valid email address, please provide a valid email address and try again.`
+  )
+}
+
+export const validateToken = async (token: string) => {
+  const schema = joi.string().alphanum()
+
+  await validateData(
+    token,
+    schema,
+    `'${token}' is not a valid api token, please refer to the documentation to obtain the api token.`
   )
 }
 
@@ -56,6 +66,26 @@ export const validatePRLink = async (prLink: string) => {
     schema,
     `'${prLink}' is not a valid URI, it needs to conform to RFC-3986 https://datatracker.ietf.org/doc/html/rfc3986. Please try again with a valid URI.`
   )
+}
+
+export const validateInputs = async (inputData: InputParameters) => {
+  const {
+    emailAddress,
+    accessToken,
+    organisation,
+    project,
+    ticketNumber,
+    prLink
+  } = inputData
+
+  await Promise.all([
+    validateEmail(emailAddress),
+    validateToken(accessToken),
+    validateOrganisation(organisation),
+    validateProject(project),
+    validateTicketNumber(ticketNumber),
+    validatePRLink(prLink)
+  ])
 }
 
 const validateData = async (

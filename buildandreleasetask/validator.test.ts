@@ -1,9 +1,12 @@
+import { InputParameters } from './types'
 import {
   validateEmail,
   validateOrganisation,
   validatePRLink,
   validateProject,
-  validateTicketNumber
+  validateTicketNumber,
+  validateToken,
+  validateInputs
 } from './validator'
 
 describe('The validator', () => {
@@ -39,6 +42,38 @@ describe('The validator', () => {
         await expect(() => validateEmail(invalidEmailAddress)).rejects.toThrow(
           new TypeError(
             `'${invalidEmailAddress}' is not a valid email address, please provide a valid email address and try again.`
+          )
+        )
+      }
+    )
+  })
+
+  describe('Should validate the api token', () => {
+    it.each`
+      validToken
+      ${'ajsl1jl2k35Kkwjef'}
+      ${'121231231231'}
+      ${'foobar'}
+    `(
+      `Should not throw an error if token is '$validToken'`,
+      async ({ validToken }) => {
+        await validateToken(validToken)
+      }
+    )
+
+    it.each`
+      invalidToken
+      ${'foo@'}
+      ${' '}
+      ${'!'}
+      ${'$'}
+      ${'`'}
+    `(
+      `Should throw an error if token is '$invalidToken'`,
+      async ({ invalidToken }) => {
+        await expect(() => validateToken(invalidToken)).rejects.toThrow(
+          new TypeError(
+            `'${invalidToken}' is not a valid api token, please refer to the documentation to obtain the api token.`
           )
         )
       }
@@ -185,5 +220,35 @@ describe('The validator', () => {
         )
       }
     )
+  })
+
+  describe('Should validate the inputs', () => {
+    it('Should not throw if all inputs are valid', async () => {
+      const validInputs: InputParameters = {
+        emailAddress: 'foo@bar.com',
+        accessToken: '4lph4num3r1c5tr1ng',
+        organisation: 'Acme',
+        project: 'ACM',
+        ticketNumber: 1,
+        prLink: 'https://github.com/acme/1'
+      }
+      await validateInputs(validInputs)
+    })
+
+    it('Should throw if some inputs are invalid', async () => {
+      const invalidInputs: InputParameters = {
+        emailAddress: 'foo',
+        accessToken: '4lph4num3r1c5tr1ng',
+        organisation: 'Acme',
+        project: 'ACM',
+        ticketNumber: 1,
+        prLink: 'https://github.com/acme/1'
+      }
+      await expect(() => validateInputs(invalidInputs)).rejects.toThrow(
+        new TypeError(
+          `'${invalidInputs.emailAddress}' is not a valid email address, please provide a valid email address and try again.`
+        )
+      )
+    })
   })
 })
