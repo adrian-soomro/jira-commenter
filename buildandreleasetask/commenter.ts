@@ -1,10 +1,5 @@
 import fetch from 'node-fetch'
-import { TicketNumber, CommenterCredentials } from './types'
-
-type JiraAPIArgumentWrapper = CommenterCredentials & {
-  ticketNumber: TicketNumber
-  prLink: string
-}
+import { TicketNumber, InputParameters, CommenterCredentials } from './types'
 
 export const getCommenter = (credentials: CommenterCredentials) => {
   return {
@@ -12,14 +7,20 @@ export const getCommenter = (credentials: CommenterCredentials) => {
       ticketNumber: TicketNumber,
       prLink: string
     ) => {
-      await commentPROnTicket({ ...credentials, ticketNumber, prLink })
+      await commentPRLinkOnTicket({ ...credentials, ticketNumber, prLink })
     }
   }
 }
 
-const commentPROnTicket = async (params: JiraAPIArgumentWrapper) => {
-  const { username, accessToken, organisation, project, ticketNumber, prLink } =
-    params
+const commentPRLinkOnTicket = async (params: InputParameters) => {
+  const {
+    emailAddress,
+    accessToken,
+    organisation,
+    project,
+    ticketNumber,
+    prLink
+  } = params
   const url = `https://${organisation}.atlassian.net/rest/api/2/issue/${project}-${ticketNumber}/comment`
 
   const requestBody = {
@@ -32,15 +33,17 @@ const commentPROnTicket = async (params: JiraAPIArgumentWrapper) => {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Basic ${getBase64EncodedCredentials(
-        username,
+        emailAddress,
         accessToken
       )}`
     }
   })
 
   if (response.status !== 201) {
-    throw new Error(`Something went wrong ${await response.text()}`)
+    throw new Error(`[x] something went wrong ${await response.text()}`)
   }
+
+  console.log('[✓] commented.')
 }
 
 const getBase64EncodedCredentials = (username: string, accessToken: string) =>
