@@ -1,0 +1,45 @@
+{
+    "manifestVersion": 1,
+    "id": "jira-commenter-task",
+    "name": "JIRA Commenter Extension",
+    "version": "1.0.0",
+    "publisher": "AdrianSoomro",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "This extension allows you to create comments on your JIRA tickets. Useful mainly for issue tracking and linking CI resources to your tickets.",
+    "categories": [
+        "Azure Pipelines"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "content": {
+        "details": {
+            "path": "docs/overview.md"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/adrian-soomro/jira-commenter"
+    },
+    "files": [
+        {
+            "path": "buildandreleasetask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "custom-build-release-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "buildandreleasetask"
+            }
+        }
+    ]
+}
