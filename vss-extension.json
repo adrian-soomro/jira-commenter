@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "jira-commenter-task",
     "name": "JIRA Commenter Extension",
-    "version": "1.0.0",
+    "version": "1.0.3",
     "publisher": "AdrianSoomro",
     "targets": [
         {
@@ -18,7 +18,7 @@
     },
     "content": {
         "details": {
-            "path": "docs/overview.md"
+            "path": "overview.md"
         }
     },
     "repository": {
@@ -28,6 +28,10 @@
     "files": [
         {
             "path": "buildandreleasetask"
+        },
+        {
+            "path": "images/information-extraction.png",
+            "addressable": true
         }
     ],
     "contributions": [
