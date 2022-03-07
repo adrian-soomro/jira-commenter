@@ -47,4 +47,4 @@ To use this extension, you'll need some information.
 
 ### Project example
 
-![information-extraction](../images/information-extraction.png)
+![information-extraction](images/information-extraction.png)
