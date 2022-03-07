@@ -7,7 +7,7 @@ A build extensions that comments on your JIRA tickets for you.
 - install this extension from the marketplace
 - add this task to your CI pipeline & fill out your JIRA details for for more information on how to source this information, check out the [getting relevant JIRA information](#getting-relevant-jira-information) section 
     ```yaml
-    - task: JiraCommenterExtension@0
+    - task: JiraCommenterExtension@1
       inputs:
         email: '$(email)'
         token: '$(token)'
@@ -20,7 +20,6 @@ A build extensions that comments on your JIRA tickets for you.
 ## Getting relevant JIRA information
 
 To use this extension, you'll need some information.
-
 
 - **email**
 

@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "jira-commenter-task",
     "name": "JIRA Commenter Extension",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "publisher": "AdrianSoomro",
     "targets": [
         {
