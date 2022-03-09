@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "jira-commenter-task",
     "name": "JIRA Commenter Extension",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publisher": "AdrianSoomro",
     "targets": [
         {
@@ -19,8 +19,12 @@
     "content": {
         "details": {
             "path": "overview.md"
+        },
+        "licence": {
+            "path": "LICENSE.md"
         }
     },
+    "public": true,
     "repository": {
         "type": "git",
         "uri": "https://github.com/adrian-soomro/jira-commenter"
