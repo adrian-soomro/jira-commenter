@@ -1,6 +1,6 @@
 # Overview
 
-A build extensions that comments on your JIRA tickets for you.
+A build pipeline extension that comments on your JIRA tickets for you.
 
 ## Usage
 
