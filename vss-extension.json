@@ -1,53 +1,49 @@
 {
-    "manifestVersion": 1,
-    "id": "jira-commenter-task",
-    "name": "JIRA Commenter Extension",
-    "version": "1.0.5",
-    "publisher": "AdrianSoomro",
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],    
-    "description": "This extension allows you to create comments on your JIRA tickets. Useful mainly for issue tracking and linking CI resources to your tickets.",
-    "categories": [
-        "Azure Pipelines"
-    ],
-    "icons": {
-        "default": "images/extension-icon.png"        
+  "manifestVersion": 1,
+  "id": "jira-commenter-task",
+  "name": "JIRA Commenter Extension",
+  "version": "1.0.7",
+  "publisher": "AdrianSoomro",
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "This extension allows you to create comments on your JIRA tickets. Useful mainly for issue tracking and linking CI resources to your tickets.",
+  "categories": ["Azure Pipelines"],
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "content": {
+    "details": {
+      "path": "overview.md"
     },
-    "content": {
-        "details": {
-            "path": "overview.md"
-        },
-        "licence": {
-            "path": "LICENSE.md"
-        }
+    "licence": {
+      "path": "LICENSE.md"
+    }
+  },
+  "public": true,
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/adrian-soomro/jira-commenter"
+  },
+  "files": [
+    {
+      "path": "buildandreleasetask"
     },
-    "public": true,
-    "repository": {
-        "type": "git",
-        "uri": "https://github.com/adrian-soomro/jira-commenter"
-    },
-    "files": [
-        {
-            "path": "buildandreleasetask"
-        },
-        {
-            "path": "images/information-extraction.png",
-            "addressable": true
-        }
-    ],
-    "contributions": [
-        {
-            "id": "custom-build-release-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "buildandreleasetask"
-            }
-        }
-    ]
+    {
+      "path": "images/information-extraction.png",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "custom-build-release-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": ["ms.vss-distributed-task.tasks"],
+      "properties": {
+        "name": "buildandreleasetask"
+      }
+    }
+  ]
 }
