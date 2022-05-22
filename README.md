@@ -18,7 +18,7 @@ To get up and running, install these dependencies
 
 `npm t` to run all unit tests
 
-## Packaging 
+## Packaging
 
 To package the extension and prepare it for being published, execute the `package.sh` script
 
@@ -28,9 +28,10 @@ To package the extension and prepare it for being published, execute the `packag
 
 ## Publishing
 
-To publish the packaged extension, execute the `publish.sh` script, passing in your Personall Access Token
+To publish the packaged extension, execute the `publish.sh` script, passing in your Personal Access Token
 
 ```sh
 ./buildandreleasetask/scripts/publish.sh "${PAT}"
 ```
-where `${PAT}` needs to be substituted for your Pernal Access Token
+
+where `${PAT}` needs to be substituted for your Personal Access Token
