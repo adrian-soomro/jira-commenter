@@ -1,6 +1,8 @@
 # Description
 
-An Azure Devops build extension that will comment on your JIRA tickets for you.
+An Azure DevOps build extension that will comment on your JIRA tickets for you.
+
+To learn a bit more about the extension and how to use it, check out the [overview](./overview.md).
 
 ## Prerequisites
 
